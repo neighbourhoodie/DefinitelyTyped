@@ -15,7 +15,7 @@ declare namespace PouchDB {
      *             PouchDB may pass a simple array and also supports complex keys.
      */
     type Reducer<Content extends {}, Reduction> = (
-        keys: Core.DocumentKey[] | null,
+        keys: Core.DocumentId[] | null,
         values: Content[] | Reduction[],
         rereduce: boolean,
     ) => Reduction[] | Reduction;
@@ -53,7 +53,7 @@ declare namespace PouchDB {
             /** Only return rows matching this key. */
             key?: Core.DocumentKey;
             /** Array of keys to fetch in a single shot. */
-            keys?: Core.DocumentKey[] | undefined;
+            keys?: Core.DocumentId[] | undefined;
             /** True if you want the reduce function to group results by keys, rather than returning a single result. */
             group?: boolean | undefined;
             /**
