@@ -557,6 +557,22 @@ declare namespace PouchDB {
             id: DocumentId;
             rev: RevisionId;
         }
+        interface ActiveTask {
+            id: string;
+            name: string;
+            total_items: number;
+            completed_items?: number;
+            created_at?: number;
+            updated_at?: number;
+        }
+
+        interface ActiveTasks {
+            list(): Promise<ActiveTask[]>;
+            add(task: { name: string } & Partial<ActiveTask>): string;
+            get(id: string): ActiveTask | undefined;
+            update(id: string, updates: Partial<ActiveTask>): void;
+            remove(id: string): void;
+        }
     }
 
     /**
@@ -945,6 +961,8 @@ declare namespace PouchDB {
 
         /** Given a set of document/revision IDs, returns the subset of those that do not correspond to revisions stored in the database */
         revsDiff(diff: Core.RevisionDiffOptions): Promise<Core.RevisionDiffResponse>;
+
+        activeTasks: Core.ActiveTasks;
     }
 }
 
